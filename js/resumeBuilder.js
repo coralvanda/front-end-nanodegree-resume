@@ -1,40 +1,47 @@
 var bio = {
-	"name": "coralv",
+	"name": "Eric",
 	"role": "unemployed",
 	"contacts": {
 		"mobile": "none",
 		"email":"email@address.com",
-		"github":"gitme"
+		"github":"coralvanda"
 	},
-	"welcomeMessage": "hey guys",
+	"welcomeMessage": "Thank you for viewing my resume",
 	"skills": [
 		"look", "at", "all", "these", "skills"
 	],
-	"location":"a place"
-}
+	"location":"Italy"
+};
 
 
 var work = {
 	"jobs" : [
 		{
-		"first job": [
-			{
-			"employer":"a place",
-			"title":"go-to guy",
-			"location":"gotham",
-			"dates worked":"some time in the past",
-			"description":"boring work"
-			}], 
-		"second job": [
-			{
-			"employer":"another place",
-			"title":"that guy",
-			"location":"big city",
-			"dates worked":"some time in the distant past",
-			"description":"more boring work"
-			}]
-	}]
-}
+			"employer":"Beacon Communications",
+			"title":"Classifieds rep",
+			"location":"Warwick",
+			"dates worked":"2006-2008",
+			"description":"Take ads from customers, \
+				paginate the ads, and post web content"
+		}, 
+		{
+			"employer":"Tasca",
+			"title":"Service rep",
+			"location":"Warwick",
+			"dates worked":"2009-2011",
+			"description":"Help customers maintain and \
+				repair their vehicles"
+		},
+		{
+			"employer":"Inskip",
+			"title":"Internet manager",
+			"location":"Warwick",
+			"dates worked":"2012-2014",
+			"description":"Manage internet team, assist \
+				internet customers, maintain online presence"
+		}
+	]
+};
 
 
 var education = { 
@@ -52,7 +59,7 @@ var education = {
 		"codecademy classes": "x, y, and z"
 		}
 	]
-}
+};
 
 
 var projects = {
@@ -72,7 +79,7 @@ var projects = {
 		"images":"still no images"
 		}
 	]
-}
+};
 
 
 var formattedName = HTMLheaderName.replace("%data%", bio.name);
@@ -81,9 +88,34 @@ $("#header").append(formattedName);
 
 if(bio.skills.length > 0){
 	$("#header").append(HTMLskillsStart);
-	for (i = 0; i < bio.skills.length; i++) {
+	for (var i = 0; i < bio.skills.length; i++) {
 		var skill = HTMLskills.replace("%data%", bio.skills[i]);
-		$("#skills-h3").append(skill);
+		$("#skills").append(skill);
 	}
 }
 
+
+function displayWork(){
+	for(var job = 0; job < work.jobs.length; job++){
+	$("#workExperience").append(HTMLworkStart);
+	if(work.jobs[job].employer){
+		var formattedEmployer = 
+			HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+	}
+	if(work.jobs[job].title){
+		var formattedJobTitle = 
+			HTMLworkTitle.replace("%data%", work.jobs[job].title);
+	}
+	$(".work-entry:last").append(formattedEmployer + formattedJobTitle);
+
+	if(work.jobs[job].location){
+		$(".work-entry:last").append(HTMLworkLocation.replace("%data%", work.jobs[job].location));
+	}
+	if(work.jobs[job]["dates worked"]){
+		$(".work-entry:last").append(HTMLworkDates.replace("%data%", work.jobs[job]["dates worked"]));
+	}
+	if (work.jobs[job].description){
+		$(".work-entry:last").append(HTMLworkDescription.replace("%data%", work.jobs[job].description));
+	}
+}
+}
